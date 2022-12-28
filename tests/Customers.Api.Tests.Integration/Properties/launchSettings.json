@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Customers.Api.Tests.Integration": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
