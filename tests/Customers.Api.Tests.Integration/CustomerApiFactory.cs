@@ -24,7 +24,6 @@ public class CustomerApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLifet
                 Username = "nick",
                 Password = "chapsas"
             })
-           .WithImage("docker.io/postgres:14.4")
            .Build();
 
     private DbConnection _dbConnection = default!;
