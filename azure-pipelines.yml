@@ -3,15 +3,33 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+trigger:
+- master
+
+resources:
+  containers:
+    - container: pg12
+      image: "postgres:12"
+      ports:
+      - 5432
+
+jobs:
+- job: "Run_Test_Suite"
+  pool:
+    vmImage: 'windows-latest'
+
+  services:
+    pg12: pg12
 
 pool:
   vmImage: 'windows-latest'
-  
+
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+steps:
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
@@ -41,3 +59,4 @@ variables:
   inputs:
     command: 'test'
     projects: '**/tests/*.csproj'
+
