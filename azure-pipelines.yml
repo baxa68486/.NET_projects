@@ -9,7 +9,7 @@ trigger:
 resources:
   containers:
     - container: pg12
-      image: "stellirin/postgres-windows:12"
+      image: postgresql-x64-13
       ports:
       - 5432
 variables:
@@ -20,7 +20,7 @@ variables:
 jobs:
 - job: "Run_Test_Suite"
   pool:
-    vmImage: 'mcr.microsoft.com/windows/nanoserver:10.0.14393.1066'
+    vmImage: windows-latest
 
   services:
     pg12: pg12
