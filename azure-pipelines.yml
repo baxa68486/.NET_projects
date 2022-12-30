@@ -3,39 +3,14 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-resources:
-  containers:
-  - container: my_container
-    image: 'windows-latest'
-  - container: pg11
-    image: postgres:11
-  - container: pg10
-    image: postgres:10
 
+pool:
+  vmImage: 'windows-latest'
+  
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-
-pool:
-  vmImage: 'windows-latest'
-
-strategy:
-  matrix:
-    postgres11:
-      postgresService: pg11
-    postgres10:
-      postgresService: pg10
-
-container: my_container
-
-services:
-  postgres: $[ variables['postgresService'] ]
-
-steps:
-- script: |
-    apt install -y postgresql-client
-    psql --host=postgres --username=postgres --command="SELECT 1;"
 
 - task: NuGetToolInstaller@1
 
