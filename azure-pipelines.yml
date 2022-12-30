@@ -3,11 +3,22 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+resources:
+  containers:
+  - container: 'postgres_windows_container_for_integration_tests'
+    image: 'stellirin/postgres-windows:11.3'
+    ports:
+    - 5432/tcp
+
 trigger:
 - master
 
 pool:
   vmImage: 'windows-latest'
+
+services:
+      db4it:
+        containerName: 'postgres_windows_container_for_integration_tests'
 
 variables:
   solution: '**/*.sln'
