@@ -9,7 +9,7 @@ trigger:
 resources:
   containers:
     - container: pg12
-      image: "postgres"
+      image: "stellirin/postgres-windows:12"
       ports:
       - 5432
 variables:
@@ -20,7 +20,7 @@ variables:
 jobs:
 - job: "Run_Test_Suite"
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: 'windows-latest'
 
   services:
     pg12: pg12
