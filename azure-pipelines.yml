@@ -9,7 +9,7 @@ trigger:
 resources:
   containers:
     - container: pg12
-      image: postgresql-x64-13
+      image: postgres:13.4
       ports:
       - 5432
 variables:
