@@ -16,9 +16,10 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+container: my_container
+
 services:
-      db4it:
-        containerName: 'postgres_windows_container_for_integration_tests'
+  postgres_windows_container_for_integration_tests: stellirin/postgres-windows:11.3
 
 variables:
   solution: '**/*.sln'
