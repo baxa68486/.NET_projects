@@ -5,26 +5,38 @@
 
 resources:
   containers:
-  - container: 'postgres_windows_container_for_integration_tests'
-    image: 'stellirin/postgres-windows:11.3'
-    ports:
-    - 5432/tcp
-
-trigger:
-- master
-
-pool:
-  vmImage: 'windows-latest'
-
-services:
-  postgres: 'postgres_windows_container_for_integration_test'
+  - container: my_container
+    image: 'windows-latest'
+  - container: pg11
+    image: postgres:11
+  - container: pg10
+    image: postgres:10
 
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+pool:
+  vmImage: 'windows-latest'
+
+strategy:
+  matrix:
+    postgres11:
+      postgresService: pg11
+    postgres10:
+      postgresService: pg10
+
+container: my_container
+
+services:
+  postgres: $[ variables['postgresService'] ]
+
 steps:
+- script: |
+    apt install -y postgresql-client
+    psql --host=postgres --username=postgres --command="SELECT 1;"
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
