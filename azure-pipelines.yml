@@ -20,7 +20,7 @@ variables:
 jobs:
 - job: "Run_Test_Suite"
   pool:
-    vmImage: 'windows-latest'
+    vmImage: 'ubuntu-latest'
 
   services:
     pg12: pg12
