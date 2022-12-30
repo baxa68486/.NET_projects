@@ -9,7 +9,6 @@ resources:
     image: 'stellirin/postgres-windows:11.3'
     ports:
     - 5432/tcp
-    options: --name postgres
 
 trigger:
 - master
@@ -18,7 +17,7 @@ pool:
   vmImage: 'windows-latest'
 
 services:
-  postgres: postgres
+  postgres: 'postgres_windows_container_for_integration_test'
 
 variables:
   solution: '**/*.sln'
