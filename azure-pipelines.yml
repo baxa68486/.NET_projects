@@ -6,6 +6,8 @@
 #      image: postgres-windows:12
 #      ports:
 #      - 5432
+#      volumes:
+#          - '/data/db:/var/lib/postgresql/data'
       
 
 trigger:
@@ -20,8 +22,7 @@ resources:
   containers:
     - container: db
       image: stellirin/postgres-windows
-      volumes:
-          - '/data/db:/var/lib/postgresql/data'
+
       env:
         POSTGRES_DB: postgres
         POSTGRES_USER: postgres
