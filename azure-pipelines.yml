@@ -19,7 +19,7 @@ resources:
       - 5432
       
     - container: db
-      image: postgres-windows:latest
+      image: postgres:latest
       volumes:
           - '/data/db:/var/lib/postgresql/data'
       env:
