@@ -30,7 +30,7 @@ resources:
 jobs:
 - job: "Run_Test_Suite"
   pool:
-    vmImage: windows-latest
+    vmImage: ubuntu-latest
 
   services:
     db: db
