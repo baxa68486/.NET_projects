@@ -30,7 +30,7 @@ resources:
 jobs:
 - job: "Run_Test_Suite"
   pool:
-    vmImage: ubuntu-latest
+    vmImage: postgres-latest
 
   services:
     db: db
