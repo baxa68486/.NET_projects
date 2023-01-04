@@ -12,6 +12,7 @@ resources:
       image: postgres-windows:12
       ports:
       - 5432
+
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
@@ -43,10 +44,6 @@ jobs:
     inputs:
       platform: '$(buildPlatform)'
       configuration: '$(buildConfiguration)'
-  - task: Docker@2
-    inputs:
-      command: 'buildAndPush'
-      Dockerfile: '**/Dockerfile'
 
   - task: Docker@2
     inputs:
