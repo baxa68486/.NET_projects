@@ -23,9 +23,6 @@ jobs:
   pool:
     vmImage: windows-latest
 
-  services:
-    pg12: pg12
-
   steps:
   - task: NuGetToolInstaller@1
 
