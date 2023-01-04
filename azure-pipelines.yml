@@ -6,22 +6,34 @@
 trigger:
 - master
 
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
 resources:
   containers:
     - container: pg12
       image: postgres-windows:12
       ports:
       - 5432
-
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+      
+    - container: db
+      image: postgres
+      volumes:
+          - '/data/db:/var/lib/postgresql/data'
+      env:
+        POSTGRES_DB: postgres
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
 
 jobs:
 - job: "Run_Test_Suite"
   pool:
     vmImage: windows-latest
+
+  services:
+    db: db
 
   steps:
   - task: NuGetToolInstaller@1
@@ -37,6 +49,7 @@ jobs:
       platform: '$(buildPlatform)'
       configuration: '$(buildConfiguration)'
 
+
   - task: VSTest@2
     inputs:
       platform: '$(buildPlatform)'
@@ -45,7 +58,7 @@ jobs:
   - task: Docker@2
     inputs:
       command: 'start'
-      container: 'pg12'
+      container: 'db'
   - task: DotNetCoreCLI@2
     inputs:
       command: 'test'
