@@ -19,7 +19,7 @@ resources:
       - 5432
       
     - container: db
-      image: postgres
+      image: postgres-windows:latest
       volumes:
           - '/data/db:/var/lib/postgresql/data'
       env:
@@ -30,7 +30,7 @@ resources:
 jobs:
 - job: "Run_Test_Suite"
   pool:
-    vmImage: postgres-latest
+    vmImage: windows-latest
 
   services:
     db: db
