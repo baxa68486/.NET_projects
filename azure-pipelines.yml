@@ -19,6 +19,7 @@ resources:
       - 5432
       
     - container: db
+      vmImage: 'ubuntu-latest'
       image: postgres:latest
       volumes:
           - '/data/db:/var/lib/postgresql/data'
