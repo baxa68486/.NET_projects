@@ -21,14 +21,14 @@ variables:
 resources:
   containers:
     - container: db
-      image: 'postgres'
+      image: 'postgres:14'
       ports:
       - 5432
       
 jobs:
 - job: "Run_Test_Suite"
   pool:
-    vmImage: winamd64/docker
+    vmImage: windows-2022
 
   services:
     db: db
