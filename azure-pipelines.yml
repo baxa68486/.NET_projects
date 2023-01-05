@@ -21,7 +21,7 @@ variables:
 resources:
   containers:
     - container: db
-      image: 'postgres:14'
+      image: 'stellirin/postgres-windows:12'
       ports:
       - 5432
       
