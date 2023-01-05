@@ -28,7 +28,7 @@ resources:
 jobs:
 - job: "Run_Test_Suite"
   pool:
-    vmImage: 'windows-2022'
+    vmImage: 'ubuntu-latest'
 
   services:
     db: db
