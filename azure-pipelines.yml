@@ -21,7 +21,7 @@ variables:
 resources:
   containers:
     - container: db
-      image: stellirin/postgres-windows
+      image: postgres
       ports:
       - 5432
       
