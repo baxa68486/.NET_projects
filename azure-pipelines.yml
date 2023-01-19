@@ -21,14 +21,14 @@ variables:
 resources:
   containers:
     - container: db
-      image: 'postgres'
+      image: 'postgres:11.3-alpine'
       ports:
       - 5432
       
 jobs:
 - job: "Run_Test_Suite"
   pool:
-    vmImage: ubuntu-latest
+    vmImage: windows-latest
 
   services:
     db: db
