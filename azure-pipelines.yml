@@ -62,4 +62,3 @@ jobs:
     inputs:
       command: 'test'
       projects: '**/tests/*.csproj'
-
