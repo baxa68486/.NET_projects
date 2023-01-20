@@ -1,17 +1,18 @@
 # ASP.NET Core (.NET Framework)
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core "postgres"
+#    - container: pg12
+#      image: postgres-windows:12
+#      ports:
+#      - 5432
+#      volumes:
+#          - '/data/db:/var/lib/postgresql/data'
+      
 
 trigger:
 - master
 
-resources:
-  containers:
-    - container: pg12
-      image: postgres-windows:12
-      ports:
-      - 5432
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
@@ -21,9 +22,6 @@ jobs:
 - job: "Run_Test_Suite"
   pool:
     vmImage: windows-latest
-
-  services:
-    pg12: pg12
 
   steps:
   - task: NuGetToolInstaller@1
@@ -39,21 +37,21 @@ jobs:
       platform: '$(buildPlatform)'
       configuration: '$(buildConfiguration)'
 
+
   - task: VSTest@2
     inputs:
       platform: '$(buildPlatform)'
       configuration: '$(buildConfiguration)'
+
   - task: Docker@2
     inputs:
       command: 'buildAndPush'
       Dockerfile: '**/Dockerfile'
-
   - task: Docker@2
     inputs:
       command: 'start'
-      container: 'pg12'
+
   - task: DotNetCoreCLI@2
     inputs:
       command: 'test'
       projects: '**/tests/*.csproj'
-
