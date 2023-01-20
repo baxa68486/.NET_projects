@@ -48,10 +48,6 @@ jobs:
 
   - task: Docker@2
     inputs:
-      command: 'buildAndPush'
-      Dockerfile: '**/Dockerfile'
-  - task: Docker@2
-    inputs:
       command: 'start'
       container: 'db'
 
