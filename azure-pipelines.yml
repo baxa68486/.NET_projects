@@ -21,7 +21,7 @@ variables:
 jobs:
 - job: "Run_Test_Suite"
   pool:
-    vmImage: ubuntu-latest
+    vmImage: windows-latest
 
   steps:
   - task: NuGetToolInstaller@1
