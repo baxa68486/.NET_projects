@@ -14,7 +14,7 @@ resources:
 jobs:
 - job: "Run_Test_Suite"
   pool:
-    vmImage: ubuntu:latest
+    vmImage: 'ubuntu:latest'
   
   services:
     db: db
