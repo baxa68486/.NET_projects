@@ -16,15 +16,26 @@ namespace Customers.Api.Tests.Integration;
 
 public class CustomerApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLifetime
 {
+    //private readonly TestcontainersContainer _dbContainer =
+    //    new TestcontainersBuilder<TestcontainersContainer>()
+    //        .WithImage("postgres:latest")
+    //        .WithEnvironment("POSTGRES_USER", "nick")
+    //        .WithEnvironment("POSTGRES_PASSWORD", "chapsas")
+    //        .WithEnvironment("POSTGRES_DB", "mydb")
+    //        .WithPortBinding(5555, 5432)
+    //        .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(5432))
+    //        .Build();
+
     private readonly PostgreSqlTestcontainer _dbContainer =
-        new TestcontainersBuilder<PostgreSqlTestcontainer>()
-            .WithDatabase(new PostgreSqlTestcontainerConfiguration
-            {
-                Database = "mydb",
-                Username = "nick",
-                Password = "chapsas"
-            })
-           .Build();
+     new TestcontainersBuilder<PostgreSqlTestcontainer>()
+         .WithDatabase(new PostgreSqlTestcontainerConfiguration
+         {
+             Database = "mydb",
+             Username = "nick",
+             Password = "chapsas"
+         })
+        .WithImage("postgres:latest")
+        .Build();
 
     private DbConnection _dbConnection = default!;
     private Respawner _respawner = default!;
@@ -37,8 +48,9 @@ public class CustomerApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLifet
         {
             services.RemoveAll(typeof(IDbConnectionFactory));
             services.AddSingleton<IDbConnectionFactory>(_ =>
+                //new NpgsqlConnectionFactory("Server=localhost; Port=5432; Database=mydb; User ID=nick; Password=chapsas;"));
                 new NpgsqlConnectionFactory(_dbContainer.ConnectionString));
-        });
+            });     
     }
 
     public async Task ResetDatabaseAsync()
@@ -50,6 +62,8 @@ public class CustomerApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLifet
     {
         await _dbContainer.StartAsync();
         _dbConnection = new NpgsqlConnection(_dbContainer.ConnectionString);
+        //new NpgsqlConnection("Server=localhost; Port=5432; Database=mydb; User ID=nick; Password=chapsas;");
+
         HttpClient = CreateClient();
         await InitializeRespawner();
     }
