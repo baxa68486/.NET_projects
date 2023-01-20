@@ -55,4 +55,3 @@ jobs:
     inputs:
       command: 'test'
       projects: '**/*.csproj'
-      #projects: '**/tests/*.csproj'
