@@ -18,11 +18,21 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+resources:
+  containers:
+    - container: db
+      image: 'postgres:latest'
+      ports:
+      - 5432
+
 jobs:
 - job: "Run_Test_Suite"
   pool:
     vmImage: windows-latest
-
+  
+  services:
+    db: db
+  
   steps:
   - task: NuGetToolInstaller@1
 
@@ -50,6 +60,7 @@ jobs:
   - task: Docker@2
     inputs:
       command: 'start'
+      container: 'db'
 
   - task: DotNetCoreCLI@2
     inputs:
