@@ -43,8 +43,8 @@ jobs:
   - task: UseDotNet@2
     displayName: 'Use .NET Core sdk'
     inputs:
+      packageType: sdk
       version: 6.0.x
-      includePreviewVersions: true
 
   - task: Docker@2
     inputs:
@@ -54,4 +54,5 @@ jobs:
   - task: DotNetCoreCLI@2
     inputs:
       command: 'test'
-      projects: '**/tests/*.csproj'
+      projects: '**/*.csproj'
+      #projects: '**/tests/*.csproj'
