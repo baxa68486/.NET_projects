@@ -1,15 +1,7 @@
 # ASP.NET Core (.NET Framework)
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core "postgres"
-#    - container: pg12
-#      image: postgres-windows:12
-#      ports:
-#      - 5432
-#      volumes:
-#          - '/data/db:/var/lib/postgresql/data'
       
-
 trigger:
 - master
 
