@@ -23,7 +23,7 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   services:
-    db: db
+    postgresservice: db
     
   steps:
   - task: NuGetToolInstaller@1
