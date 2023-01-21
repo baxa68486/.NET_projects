@@ -22,9 +22,6 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
   
-  services:
-    db: db
-  
   steps:
   - task: NuGetToolInstaller@1
 
