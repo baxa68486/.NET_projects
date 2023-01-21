@@ -16,16 +16,6 @@ namespace Customers.Api.Tests.Integration;
 
 public class CustomerApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLifetime
 {
-    //private readonly TestcontainersContainer _dbContainer =
-    //    new TestcontainersBuilder<TestcontainersContainer>()
-    //        .WithImage("postgres:latest")
-    //        .WithEnvironment("POSTGRES_USER", "nick")
-    //        .WithEnvironment("POSTGRES_PASSWORD", "chapsas")
-    //        .WithEnvironment("POSTGRES_DB", "mydb")
-    //        .WithPortBinding(5555, 5432)
-    //        .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(5432))
-    //        .Build();
-
     private readonly PostgreSqlTestcontainer _dbContainer =
      new TestcontainersBuilder<PostgreSqlTestcontainer>()
          .WithDatabase(new PostgreSqlTestcontainerConfiguration
