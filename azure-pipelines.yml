@@ -16,12 +16,15 @@ resources:
       image: postgres:latest
       ports:
       - 5432
-
+  
 jobs:
 - job: "Run_Test_Suite"
   pool:
     vmImage: 'ubuntu-latest'
-  
+
+  services:
+    db: db
+    
   steps:
   - task: NuGetToolInstaller@1
 
